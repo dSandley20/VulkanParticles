@@ -15,7 +15,31 @@
 #extension GL_ARB_separate_shader_objects : enable
 #extension GL_ARB_shading_language_420pack : enable
 
-layout(binding = 0) uniform  Vertex {
+
+struct WindGridInfo {
+   uint visiblePosInScreenX;
+   uint visiblePosInScreenY;
+   uint width;
+   uint height;
+   uint screenWidth;
+   uint screenHeight;
+   uint visibleWidth;
+   uint visibleHeight;
+};
+
+struct WindGridPoint {
+   float speed;
+   uint angle;
+};
+
+struct ScreenPortion {
+   vec2 topLeft;
+   vec2 bottomRight;
+   uint particle_count;
+   uint id_num;
+};
+
+struct Vertex {
    vec4 color;
    vec2 pos;
    float speed;
@@ -26,36 +50,58 @@ layout(binding = 0) uniform  Vertex {
    uint kill;
    uint screenPortion_id;
    uint index;
-}
-vertexArray;
-
-layout(binding = 1) uniform  WindGridPoint {
-   float speed;
-   uint angle;
-} windGridPoints;
-
-layout(binding = 2) uniform WindGridInfo {
-   uint visiblePosInScreenX;
-   uint visiblePosInScreenY;
-   uint width;
-   uint height;
-   uint screenWidth;
-   uint screenHeight;
-   uint visibleWidth;
-   uint visibleHeight;
-} windGridInfo;
-
-layout(binding = 3) uniform ScreenPortion {
-   vec2 topLeft;
-   vec2 bottomRight;
-   uint particle_count;
-   uint id_num;
-} portions;
+};
 
 
 //layout(binding = 4) in uint vid;
 
 layout (location = 0) in vec4 pos;
+
+
+layout (binding = 1) uniform Vertex2 {
+   Vertex list[2];
+} vertexArray;
+
+layout(binding = 2) uniform WindGridPoint2 {
+   WindGridPoint list[2];
+} windGridPoints;
+
+layout (binding = 3) uniform WindGridInfo2 {
+   WindGridInfo list[2];
+} windGridInfo;
+
+layout(binding =4) uniform ScreenPortion2{
+   ScreenPortion list[2];
+}portions;
+
+vec2 normalizedPosToVisibleCoord(vec2 pos, WindGridInfo info) {
+   float x = pos.x;
+   float y = pos.y;
+   x *=  1.0;
+   y *= -1.0;
+   x += 1;
+   y += 1;
+   return vec2((x / 2.0) * info.visibleWidth, (y / 2.0) * info.visibleHeight);
+}
+
+vec2 visibleCoordToParentViewCoord(vec2 pos, WindGridInfo info) {
+   return vec2(pos.x + info.visiblePosInScreenX, pos.y + info.visiblePosInScreenY);
+}
+
+vec2 parentViewCoordToDataPoint(vec2 pos, WindGridInfo info) {
+   float x = pos.x;
+   float y = pos.y;
+   float scaledX = info.screenWidth / info.width;
+   float scaledY = info.screenHeight / info.height;
+   return vec2(x / scaledX, y / scaledY);
+}
+
+//vec2 normalizedCoordToGridPoint(vec2 pos, WindGridInfo info) {
+//   vec2 visiblePos = normalizedPosToVisibleCoord(pos, info);
+//   vec2 parentPos = visibleCoordToParentViewCoord(visiblePos, info);
+//   vec2 gridPoint = parentViewCoordToDataPoint(parentPos, info);
+//   return gridPoint;
+//}
 
 void main() {
    gl_Position = pos;
