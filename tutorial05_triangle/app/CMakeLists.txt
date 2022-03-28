@@ -16,6 +16,7 @@ add_library(vktuts SHARED
             ${SRC_DIR}/AndroidMain.cpp
             ${WRAPPER_DIR}/vulkan_wrapper.cpp
             ${GLM_DIR}/common.hpp
+            ${SRC_DIR}/util.cpp
             )
 
 include_directories(${WRAPPER_DIR})
