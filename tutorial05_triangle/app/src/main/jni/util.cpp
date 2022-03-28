@@ -13,6 +13,7 @@
 #include <ext/vector_uint3.hpp>
 #include <ext/vector_uint4.hpp>
 #include <ext/matrix_float4x3.hpp>
+#include <vector>
 
 // Struct definitions
 #define vector_float2 glm::vec2
