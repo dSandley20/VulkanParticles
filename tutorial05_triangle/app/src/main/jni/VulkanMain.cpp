@@ -278,7 +278,7 @@ void CreateSwapChain(void) {
       .oldSwapchain = VK_NULL_HANDLE,
   };
   CALL_VK(vkCreateSwapchainKHR(device.device_, &swapchainCreateInfo, nullptr,
-                               &swapchain.swapchain_));
+                               &swapchain.swapchain_))
 
   // Get the length of the created swap chain
   CALL_VK(vkGetSwapchainImagesKHR(device.device_, swapchain.swapchain_,
@@ -287,7 +287,7 @@ void CreateSwapChain(void) {
   LOGI("<-createSwapChain");
 }
 
-void DeleteSwapChain(void) {
+void DeleteSwapChain() {
   for (int i = 0; i < swapchain.swapchainLength_; i++) {
     vkDestroyFramebuffer(device.device_, swapchain.framebuffers_[i], nullptr);
     vkDestroyImageView(device.device_, swapchain.displayViews_[i], nullptr);
