@@ -15,8 +15,6 @@
 #extension GL_ARB_separate_shader_objects : enable
 #extension GL_ARB_shading_language_420pack : enable
 
-
-
 layout(binding = 0) uniform  Vertex {
    vec4 color;
    vec2 pos;
@@ -55,7 +53,7 @@ layout(binding = 3) uniform ScreenPortion {
 } portions;
 
 
-layout(binding = 4) uniform uint vid;
+//layout(binding = 4) in uint vid;
 
 layout (location = 0) in vec4 pos;
 

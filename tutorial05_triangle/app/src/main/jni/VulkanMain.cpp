@@ -21,6 +21,29 @@
 #include <cstring>
 #include <vector>
 
+#include <ext/vector_float2.hpp>
+#include <ext/vector_float3.hpp>
+#include <ext/vector_float4.hpp>
+#include <ext/vector_int2.hpp>
+#include <ext/vector_int3.hpp>
+#include <ext/vector_int4.hpp>
+#include <ext/vector_uint2.hpp>
+#include <ext/vector_uint3.hpp>
+#include <ext/vector_uint4.hpp>
+#include <ext/matrix_float4x3.hpp>
+#include <vector>
+
+// Struct definitions
+#define vector_float2 glm::vec2
+#define vector_float3 glm::vec3
+#define vector_float4 glm::vec4
+#define vector_int2 glm::ivec2
+#define vector_int3 glm::ivec3
+#define vector_int4 glm::ivec4
+#define vector_uint2 glm::uvec2
+#define vector_uint3 glm::uvec3
+#define vector_uint4 glm::uvec4
+
 // Android log function wrappers
 static const char* kTAG = "Vulkan-Tutorial05";
 #define LOGI(...) \
@@ -111,6 +134,42 @@ struct VertexHolder{
 
 struct VertexHolderArray{
     VertexHolder list[2];
+};
+
+struct  Vertex {
+        glm::vec4 color;
+    glm::vec2 pos;
+        float speed;
+    glm::vec2 velocity;
+    glm::vec2 normalizedVelocity;
+        glm::ivec3 rng;
+        uint lifetime;
+        uint kill;
+        uint screenPortion_id;
+        uint index;
+};
+
+struct WindGridPoint {
+        float speed;
+        uint angle;
+};
+
+struct WindGridInfo {
+        uint visiblePosInScreenX;
+        uint visiblePosInScreenY;
+        uint width;
+        uint height;
+        uint screenWidth;
+        uint screenHeight;
+        uint visibleWidth;
+        uint visibleHeight;
+};
+
+struct ScreenPortion {
+    glm::vec2 topLeft;
+    glm::vec2 bottomRight;
+        uint particle_count;
+        uint id_num;
 };
 
 VertexHolderArray vertexArray;
