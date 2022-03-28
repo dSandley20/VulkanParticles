@@ -17,8 +17,7 @@
 
 
 
-
-layout(binding = 0) uniform Vertex {
+layout(binding = 0) uniform  Vertex {
    vec4 color;
    vec2 pos;
    float speed;
@@ -29,12 +28,13 @@ layout(binding = 0) uniform Vertex {
    uint kill;
    uint screenPortion_id;
    uint index;
-} vertex;
+}
+vertexArray;
 
 layout(binding = 1) uniform  WindGridPoint {
    float speed;
    uint angle;
-} windGridPoint;
+} windGridPoints;
 
 layout(binding = 2) uniform WindGridInfo {
    uint visiblePosInScreenX;
@@ -52,8 +52,10 @@ layout(binding = 3) uniform ScreenPortion {
    vec2 bottomRight;
    uint particle_count;
    uint id_num;
-} screePortion;
+} portions;
 
+
+layout(binding = 4) uniform uint vid;
 
 layout (location = 0) in vec4 pos;
 
