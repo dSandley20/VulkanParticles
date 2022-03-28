@@ -16,10 +16,44 @@
 #extension GL_ARB_shading_language_420pack : enable
 
 
-layout(binding = 0) uniform UniformBufferObject{
-   float x;
-   float y;
-};
+
+
+layout(binding = 0) uniform Vertex {
+   vec4 color;
+   vec2 pos;
+   float speed;
+   vec2 velocity;
+   vec2 normalizedVelocity;
+   ivec3 rng;
+   uint lifetime;
+   uint kill;
+   uint screenPortion_id;
+   uint index;
+} vertex;
+
+layout(binding = 1) uniform  WindGridPoint {
+   float speed;
+   uint angle;
+} windGridPoint;
+
+layout(binding = 2) uniform WindGridInfo {
+   uint visiblePosInScreenX;
+   uint visiblePosInScreenY;
+   uint width;
+   uint height;
+   uint screenWidth;
+   uint screenHeight;
+   uint visibleWidth;
+   uint visibleHeight;
+} windGridInfo;
+
+layout(binding = 3) uniform ScreenPortion {
+   vec2 topLeft;
+   vec2 bottomRight;
+   uint particle_count;
+   uint id_num;
+} screePortion;
+
 
 layout (location = 0) in vec4 pos;
 
