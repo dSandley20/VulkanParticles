@@ -13,6 +13,7 @@
 #include <ext/vector_uint3.hpp>
 #include <ext/vector_uint4.hpp>
 #include <ext/matrix_float4x3.hpp>
+
 // Struct definitions
 #define vector_float2 glm::vec2
 #define vector_float3 glm::vec3
@@ -39,6 +40,13 @@
 #define uint4x3 glm::umat4x3
 #define half float
 #define half4 glm::vec4
+
+float2 operator/ (const int& lhs, const float2& rhs) {
+    return float2(lhs / rhs.x, lhs / rhs.y);
+}
+float2 operator/ (const float2& lhs, const int& rhs) {
+    return float2(lhs.x / rhs, lhs.y / rhs);
+}
 
 // Shader Definitions
 struct ScreenPortion {
