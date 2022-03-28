@@ -14,7 +14,15 @@
 #version 400
 #extension GL_ARB_separate_shader_objects : enable
 #extension GL_ARB_shading_language_420pack : enable
+
+layout(binding = 0) uniform UniformBufferObject{
+   float x;
+   float y;
+};
+
 layout (location = 0) in vec4 pos;
+
 void main() {
    gl_Position = pos;
+   gl_PointSize = 10.0;
 }

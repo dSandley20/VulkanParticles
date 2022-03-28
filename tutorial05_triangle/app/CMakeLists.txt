@@ -12,7 +12,8 @@ set(WRAPPER_DIR ../../common/vulkan_wrapper)
 add_library(vktuts SHARED
             ${SRC_DIR}/VulkanMain.cpp
             ${SRC_DIR}/AndroidMain.cpp
-            ${WRAPPER_DIR}/vulkan_wrapper.cpp)
+            ${WRAPPER_DIR}/vulkan_wrapper.cpp
+            )
 
 include_directories(${WRAPPER_DIR})
 
